@@ -1,10 +1,10 @@
 import type {CyclistData} from "../interface/CyclistData.ts";
 import styled from "styled-components";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
 interface CyclistProps {
     cyclist: CyclistData;
-    onClick?: (cyclist: CyclistData) => void;
 }
 
 const CyclistCard = styled.div<{ $ranking: number }>`
@@ -32,9 +32,15 @@ const CyclistCard = styled.div<{ $ranking: number }>`
     }
 `;
 
-const Cyclist: React.FC<CyclistProps> = ({cyclist, onClick}) => {
+const Cyclist: React.FC<CyclistProps> = ({cyclist}) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/cyclists/${cyclist.id}`);
+    };
+
     return (
-        <CyclistCard $ranking={cyclist.ranking} onClick={() => onClick?.(cyclist)}>
+        <CyclistCard $ranking={cyclist.ranking} onClick={handleClick}>
             <h3>{cyclist.name} - {cyclist.ranking}</h3>
         </CyclistCard>
     );

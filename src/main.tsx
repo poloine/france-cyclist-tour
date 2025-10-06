@@ -5,6 +5,7 @@ import App from './App.tsx'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Cyclists from "./pages/Cyclists.tsx";
 import Base from "./layouts/Base.tsx";
+import CyclistDetails from "./components/CyclistDetails.tsx";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: "/cyclists",
                 element: <Cyclists />
+            },
+            {
+                path: "/cyclists/:id",
+                element: <CyclistDetails />
             }
         ]
     }

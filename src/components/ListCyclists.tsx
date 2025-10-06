@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 interface ListCyclistsProps {
     cyclists: CyclistData[];
-    onSelectCyclist?: (cyclist: CyclistData) => void;
 }
 
 const ListContainer = styled.div`
@@ -17,11 +16,11 @@ const ListContainer = styled.div`
     gap: 2em;
 `;
 
-const ListCyclists: React.FC<ListCyclistsProps> = ({cyclists, onSelectCyclist}) => {
+const ListCyclists: React.FC<ListCyclistsProps> = ({cyclists}) => {
     return (
         <ListContainer>
             {cyclists.map((cyclist, index) => (
-                <Cyclist key={index} cyclist={cyclist} onClick={onSelectCyclist}/>
+                <Cyclist key={index} cyclist={cyclist} />
             ))}
         </ListContainer>
     );
