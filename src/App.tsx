@@ -1,7 +1,9 @@
 import './App.css'
+import React from "react";
+import Courses from "./pages/Courses.tsx";
 
-function App() {
-  return "a"
-}
+const App: React.FC = () => {
+  return <Courses />;
+};
 
 export default App
