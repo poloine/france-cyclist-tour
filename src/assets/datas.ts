@@ -1,4 +1,6 @@
-const trips = [
+import type {StepData} from "../interface/StepData.ts";
+
+const trips: StepData[] = [
     { date: "2025-03-12", departure: "Paris", arrival: "Lyon", distanceKm: 465 },
     { date: "2024-11-05", departure: "Marseille", arrival: "Nice", distanceKm: 200 },
     { date: "2026-01-22", departure: "Bordeaux", arrival: "Toulouse", distanceKm: 245 },
