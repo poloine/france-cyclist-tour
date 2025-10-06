@@ -10,7 +10,7 @@ interface StepDetailsProps {
 const Sidebar = styled.aside<{ $visible: boolean }>`
   top: 0;
   right: 0;
-  width: 350px;
+  width: 250px;
   background: white;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   transform: translateX(${({ $visible }) => ($visible ? "0" : "100%")});

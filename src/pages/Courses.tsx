@@ -107,7 +107,7 @@ const Courses: React.FC = () => {
                     </ToggleLabel>
                 </ToggleContainer>
 
-                <ListSteps steps={filteredTrips} onSelectStep={handleSelectStep} />
+                <ListSteps steps={filteredTrips} selectedStep={selectedStep} onSelectStep={handleSelectStep} />
             </ListContainer>
 
             <StepDetails step={selectedStep} onClose={handleCloseDetails} />

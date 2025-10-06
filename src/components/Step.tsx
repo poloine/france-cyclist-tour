@@ -7,11 +7,12 @@ interface StepProps {
     step: StepData;
     index: number;
     isPast: boolean;
+    isSelected: boolean;
     onClick?: (step: StepData) => void;
 }
 
-const StageCard = styled.div<{ $isPast?: boolean }>`
-  background-color: ${({ $isPast }) => ($isPast ? "#e5e7eb" : "#e0f2fe")};
+const StageCard = styled.div<{ $isPast?: boolean, $isSelected?: boolean }>`
+  background-color: ${({ $isPast, $isSelected }) => ($isSelected ? "#bff7d7" : $isPast ? "#e5e7eb" : "#e0f2fe")};
   border-radius: 8px;
   padding: 1rem 1.5rem;
   margin-bottom: 1rem;
@@ -33,7 +34,7 @@ const StageInfo = styled.p`
   color: #374151;
 `;
 
-const Step: React.FC<StepProps> = ({ step, index, isPast, onClick }) => {
+const Step: React.FC<StepProps> = ({ step, index, isPast, isSelected, onClick }) => {
     const dateObj = new Date(step.date);
     const formattedDate = dateObj.toLocaleDateString("fr-FR", {
         year: "numeric",
@@ -42,7 +43,7 @@ const Step: React.FC<StepProps> = ({ step, index, isPast, onClick }) => {
     });
 
     return (
-        <StageCard $isPast={isPast} onClick={() => onClick?.(step)}>
+        <StageCard $isPast={isPast} $isSelected={isSelected} onClick={() => onClick?.(step)}>
             <StageTitle>
                 Étape n°{index + 1} : {step.departure}
             </StageTitle>
