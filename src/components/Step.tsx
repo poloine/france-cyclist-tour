@@ -44,10 +44,10 @@ const Step: React.FC<StepProps> = ({ step, index, isPast, onClick }) => {
     return (
         <StageCard $isPast={isPast} onClick={() => onClick?.(step)}>
             <StageTitle>
-                Étape n°{index + 1} : {step.departure} → {step.arrival}
+                Étape n°{index + 1} : {step.departure}
             </StageTitle>
             <StageInfo>
-                {formattedDate} – {step.distanceKm} km
+                {formattedDate}
             </StageInfo>
         </StageCard>
     );
