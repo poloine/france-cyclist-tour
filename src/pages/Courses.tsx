@@ -3,10 +3,18 @@ import styled from "styled-components";
 import ListSteps from "../components/ListSteps";
 import type {StepData} from "../interface/StepData.ts";
 import trips from "../assets/datas.ts";
+import StepDetails from "../components/StepDetails.tsx";
 
 const PageContainer = styled.div`
-    max-width: 800px;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+`;
+
+const ListContainer = styled.div`
+    flex: 1;
+    max-width: 1100px;
 `;
 
 const Title = styled.h1`
@@ -31,34 +39,34 @@ const ToggleLabel = styled.label`
 `;
 
 const ToggleInput = styled.input`
-    appearance: none;
-    width: 38px;
-    height: 20px;
-    border-radius: 10px;
-    background: #ccc;
-    position: relative;
-    transition: background 0.3s ease;
-    cursor: pointer;
+  appearance: none;
+  width: 38px;
+  height: 20px;
+  border-radius: 10px;
+  background: #ccc;
+  position: relative;
+  transition: background 0.3s ease;
+  cursor: pointer;
 
-    &::before {
-        content: "";
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 16px;
-        height: 16px;
-        background: white;
-        border-radius: 50%;
-        transition: transform 0.3s ease;
-    }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
 
-    &:checked {
-        background: #22c55e;
-    }
+  &:checked {
+    background: #22c55e;
+  }
 
-    &:checked::before {
-        transform: translateX(18px);
-    }
+  &:checked::before {
+    transform: translateX(18px);
+  }
 `;
 
 const isFutureDate = (dateStr: string): boolean => {
@@ -69,31 +77,40 @@ const isFutureDate = (dateStr: string): boolean => {
 
 const Courses: React.FC = () => {
     const [showFutureOnly, setShowFutureOnly] = useState(false);
+    const [selectedStep, setSelectedStep] = useState<StepData | null>(null);
 
-    const filteredTrips = showFutureOnly
-        ? trips.filter((trip: StepData) => isFutureDate(trip.date))
-        : trips;
+    const filteredTrips = (showFutureOnly
+        ? trips.filter((trip) => isFutureDate(trip.date))
+        : trips).sort((a, b) => a.date.localeCompare(b.date));
 
     const handleSelectStep = (step: StepData) => {
-        console.log("Étape sélectionnée :", step);
+        setSelectedStep(step);
+    };
+
+    const handleCloseDetails = () => {
+        setSelectedStep(null);
     };
 
     return (
         <PageContainer>
-            <Title>Les étapes</Title>
+            <ListContainer>
+                <Title>Les étapes</Title>
 
-            <ToggleContainer>
-                <ToggleLabel>
-                    <ToggleInput
-                        type="checkbox"
-                        checked={showFutureOnly}
-                        onChange={() => setShowFutureOnly(!showFutureOnly)}
-                    />
-                    Afficher uniquement les dates à venir
-                </ToggleLabel>
-            </ToggleContainer>
+                <ToggleContainer>
+                    <ToggleLabel>
+                        <ToggleInput
+                            type="checkbox"
+                            checked={showFutureOnly}
+                            onChange={() => setShowFutureOnly(!showFutureOnly)}
+                        />
+                        Afficher uniquement les dates à venir
+                    </ToggleLabel>
+                </ToggleContainer>
 
-            <ListSteps steps={filteredTrips} onSelectStep={handleSelectStep} />
+                <ListSteps steps={filteredTrips} onSelectStep={handleSelectStep} />
+            </ListContainer>
+
+            <StepDetails step={selectedStep} onClose={handleCloseDetails} />
         </PageContainer>
     );
 };
