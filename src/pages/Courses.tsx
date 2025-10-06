@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ListSteps from "../components/ListSteps";
 import type {StepData} from "../interface/StepData.ts";
-import trips from "../assets/datas.ts";
+import {trips} from "../assets/datas.ts";
 import StepDetails from "../components/StepDetails.tsx";
 
 const PageContainer = styled.div`
